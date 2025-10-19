@@ -51,6 +51,9 @@ export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
 
       await bookStorage.add(newBook);
 
+      console.log('Book added successfully');
+      console.log(newBook);
+
       onBookAdded?.(newBook);
     } catch (err) {
       setError('Failed to add book');
@@ -58,10 +61,13 @@ export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
       setLoading(false);
     }
   };
+
   // Render method
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Add Book</Text>
+      <Text style={styles.subtitle}>Add a new book to your library</Text>
+
       <TextInput style={styles.input} placeholder="Title" value={title} onChangeText={setTitle} />
       <TextInput style={styles.input} placeholder="Author" value={author} onChangeText={setAuthor} />
       <TextInput style={styles.input} placeholder="ISBN" value={isbn} onChangeText={setIsbn} />
@@ -113,5 +119,9 @@ const styles = StyleSheet.create({
     color: 'red',
     marginTop: 10,
     textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 20,
   },
 });
