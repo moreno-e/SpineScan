@@ -1,58 +1,40 @@
 import { Book } from './book';
 
-// Root Stack Navigator - defines what parameters each screen expects
+// Expo Router route parameters
 export type RootStackParamList = {
-  Home: undefined;                    // No parameters needed
-  Scanner: undefined;                // No parameters needed  
-  ManualAdd: undefined;              // No parameters needed
-  BookDetail: { book: Book };        // Needs a book object
+  index: undefined;                    // Home screen (no parameters)
+  scanner: undefined;                // Scanner screen (no parameters)  
+  'manual-add': undefined;           // Manual Add screen (no parameters)
+  'book-detail': { book: string };   // Book Detail screen (book as JSON string)
 };
 
-// Tab Navigator (if you decide to use tabs)
-export type TabParamList = {
-  HomeTab: undefined;
-  ScannerTab: undefined;
-  SearchTab: undefined;
-};
-
-// Navigation function types (what you can call on navigation object)
-export interface NavigationFunctions {
-  navigate: (screen: keyof RootStackParamList, params?: any) => void;
-  goBack: () => void;
-  reset: (state: any) => void;
+// Expo Router navigation functions
+export interface ExpoRouterNavigation {
+  push: (href: string, params?: any) => void;
+  replace: (href: string, params?: any) => void;
+  back: () => void;
+  canGoBack: () => boolean;
 }
 
-// Route parameter types (what data gets passed to each screen)
-export type HomeRouteParams = RootStackParamList['Home'];        // undefined
-export type ScannerRouteParams = RootStackParamList['Scanner'];  // undefined
-export type ManualAddRouteParams = RootStackParamList['ManualAdd']; // undefined
-export type BookDetailRouteParams = RootStackParamList['BookDetail']; // { book: Book }
+// Route parameter types for Expo Router
+export type HomeRouteParams = undefined;
+export type ScannerRouteParams = undefined;
+export type ManualAddRouteParams = undefined;
+export type BookDetailRouteParams = { book: string }; // JSON string of Book
 
-// Screen-specific navigation props
+// Screen-specific props for Expo Router
 export interface HomeScreenProps {
-  navigation: NavigationFunctions;
-  route: {
-    params: HomeRouteParams;
-  };
+  // Expo Router doesn't pass navigation as prop, use router from expo-router
 }
 
 export interface ScannerScreenProps {
-  navigation: NavigationFunctions;
-  route: {
-    params: ScannerRouteParams;
-  };
+  // Expo Router doesn't pass navigation as prop, use router from expo-router
 }
 
 export interface ManualAddScreenProps {
-  navigation: NavigationFunctions;
-  route: {
-    params: ManualAddRouteParams;
-  };
+  // Expo Router doesn't pass navigation as prop, use router from expo-router
 }
 
 export interface BookDetailScreenProps {
-  navigation: NavigationFunctions;
-  route: {
-    params: BookDetailRouteParams;
-  };
+  // Use useLocalSearchParams() hook to get route parameters
 }
