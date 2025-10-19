@@ -1,0 +1,77 @@
+# Book Scanner App - Development Guidelines
+
+## Project Context
+This is a React Native mobile app built with Expo for scanning and managing a personal book collection.
+
+**Key Files:**
+- See docs/ARCHITECTURE.md for full technical architecture
+- See docs/DECISIONS.md for why we made certain choices
+
+## Tech Stack
+- React Native with Expo (SDK ~52)
+- TypeScript
+- React Navigation (Stack + Tabs)
+- AsyncStorage for local data
+- expo-barcode-scanner for scanning
+- Google Books API for book data
+
+## Code Style Preferences
+- Use functional components (no class components)
+- Use TypeScript strictly (no `any` types)
+- Prefer custom hooks for reusable logic
+- Use `async/await` over promises
+- Keep components small and focused
+- Follow the folder structure in docs/ARCHITECTURE.md
+
+## Naming Conventions
+- Components: PascalCase (BookCard.tsx)
+- Hooks: camelCase with 'use' prefix (useBooks.ts)
+- Utilities: camelCase (formatDate.ts)
+- Types: PascalCase (Book.ts)
+- Constants: UPPER_SNAKE_CASE
+
+## State Management
+- Start with React Context + AsyncStorage
+- Don't suggest Redux unless complexity requires it
+- Keep state close to where it's used
+
+## Important Constraints
+- This is local-storage only (no authentication for MVP)
+- Must work offline
+- Optimize for barcode scanning speed
+- Keep dependencies minimal
+
+## When Helping Me
+1. Reference the architecture doc if unclear about decisions
+2. Suggest Expo-compatible solutions (not bare React Native)
+3. Remind me if I'm deviating from the architecture plan
+4. Flag if a dependency isn't in our tech stack
+5. Keep explanations beginner-friendly (I'm learning React Native from Vue)
+
+## What I'm Learning
+- Coming from Vue 3/Nuxt background
+- New to React hooks, React Navigation, mobile development
+- Explain React patterns when they differ from Vue
+```
+
+### 3. **How to Use in Cursor**
+
+**Method A: @ Mentions (Most Direct)**
+In Cursor's chat, you can reference files:
+```
+@ARCHITECTURE.md How should I structure the BookCard component?
+
+@.cursorrules @storage.ts Help me add a remove book function
+```
+
+**Method B: Codebase Context (Automatic)**
+Cursor automatically reads your project files. Just ask questions naturally:
+```
+"How should I implement the scanner screen based on our architecture?"
+```
+Cursor will read your `.cursorrules` and docs automatically.
+
+**Method C: Composer Mode** (For larger tasks)
+Use Cmd+I (or Ctrl+I) to open Composer, which has better awareness of your whole project:
+```
+"Create the HomeScreen component following our architecture document"

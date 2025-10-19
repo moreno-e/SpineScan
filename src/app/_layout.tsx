@@ -3,33 +3,40 @@ import { Stack } from 'expo-router';
 export default function RootLayout() {
   return (
     <Stack>
-      <Stack.Screen 
-        name="index" 
-        options={{ 
+      <Stack.Screen
+        name="index"
+        options={{
           title: 'My Library',
-          headerShown: true 
-        }} 
+          headerShown: true,
+        }}
       />
-      <Stack.Screen 
-        name="scanner" 
-        options={{ 
+      <Stack.Screen
+        name="scanner"
+        options={{
           title: 'Scan Book',
-          headerShown: true 
-        }} 
+          headerShown: true,
+        }}
       />
-      <Stack.Screen 
-        name="manual-add" 
-        options={{ 
+      <Stack.Screen
+        name="manual-add"
+        options={{
           title: 'Add Book Manually',
-          headerShown: true 
-        }} 
+          headerShown: true,
+        }}
       />
-      <Stack.Screen 
-        name="book-detail" 
-        options={{ 
+      <Stack.Screen
+        name="show-books"
+        options={{
+          title: 'Show Books',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="book-detail"
+        options={{
           title: 'Book Details',
-          headerShown: true 
-        }} 
+          headerShown: true,
+        }}
       />
     </Stack>
   );

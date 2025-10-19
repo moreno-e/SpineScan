@@ -6,20 +6,21 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>My Book Library</Text>
       <Text style={styles.subtitle}>Scan and manage your book collection</Text>
-      
+
       <View style={styles.buttonContainer}>
-        <TouchableOpacity 
-          style={styles.primaryButton}
-          onPress={() => router.push('/scanner')}
-        >
+        {/* Scan Book */}
+        <TouchableOpacity style={styles.primaryButton} onPress={() => router.push('/scanner')}>
           <Text style={styles.buttonText}>Scan Book</Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={styles.secondaryButton}
-          onPress={() => router.push('/manual-add')}
-        >
+
+        {/* Add Manually */}
+        <TouchableOpacity style={styles.secondaryButton} onPress={() => router.push('/manual-add')}>
           <Text style={styles.secondaryButtonText}>Add Manually</Text>
+        </TouchableOpacity>
+
+        {/* Show Books */}
+        <TouchableOpacity style={styles.secondaryButton} onPress={() => router.push('/show-books')}>
+          <Text style={styles.secondaryButtonText}>Show Books</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 32,
     borderRadius: 12,
+    marginBottom: 16,
     alignItems: 'center',
   },
   buttonText: {

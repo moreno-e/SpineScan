@@ -3,16 +3,12 @@ import { useLocalSearchParams } from 'expo-router';
 
 export default function BookDetailScreen() {
   const { book } = useLocalSearchParams();
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Book Detail Screen</Text>
       <Text style={styles.subtitle}>Book details will be displayed here</Text>
-      {book && (
-        <Text style={styles.bookInfo}>
-          Book data: {JSON.stringify(book)}
-        </Text>
-      )}
+      {book && <Text style={styles.bookInfo}>Book data: {JSON.stringify(book)}</Text>}
     </View>
   );
 }
