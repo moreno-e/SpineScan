@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Book } from '../types';
 import { FC } from 'react';
-import { bookStorage } from '../services/bookStorage';
+import { useBooks } from '../hooks/useBooks';
 
 type AddBookProps = {
   onBookAdded?: (book: Book) => void;
@@ -10,6 +10,8 @@ type AddBookProps = {
 };
 
 export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
+  const { addBook } = useBooks();
+
   // State declarations
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
@@ -23,16 +25,17 @@ export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
   const validateForm = () => {
     if (!title.trim()) {
       setError('Title is required');
+
       return false;
     }
     if (!author.trim()) {
       setError('Author is required');
+
       return false;
     }
     return true;
   };
 
-  // Submit function
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
@@ -49,20 +52,28 @@ export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
         addedAt: Date.now(),
       };
 
-      await bookStorage.add(newBook);
+      await addBook(newBook);
 
-      console.log('Book added successfully');
-      console.log(newBook);
+      // Clear form after successful add
+      setTitle('');
+      setAuthor('');
+      setIsbn('');
+      setDescription('');
+      setCoverUrl('');
+
+      Alert.alert('Success', 'Book added to your collection!');
 
       onBookAdded?.(newBook);
     } catch (err) {
-      setError('Failed to add book');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to add book';
+      setError(errorMessage);
+
+      Alert.alert('Error', errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
-  // Render method
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Add Book</Text>
