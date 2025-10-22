@@ -91,7 +91,6 @@ export const BookList = () => {
         data={books}
         keyExtractor={item => item.isbn}
         renderItem={({ item }: { item: Book }) => {
-          console.log('Rendering book:', item.title);
           return (
             <Animated.View
               style={{
