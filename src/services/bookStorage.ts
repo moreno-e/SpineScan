@@ -59,10 +59,7 @@ export const bookStorage = {
       const updatedBooks = books.filter(book => book.isbn !== isbn);
 
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updatedBooks));
-      console.log('Book removed successfully');
-      console.log(updatedBooks);
     } catch (error) {
-      console.error('Error removing book:', error);
       throw new Error('Failed to remove book');
     }
   },
