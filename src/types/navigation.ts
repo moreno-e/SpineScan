@@ -2,10 +2,10 @@ import { Book } from './book';
 
 // Expo Router route parameters
 export type RootStackParamList = {
-  index: undefined;                    // Home screen (no parameters)
-  scanner: undefined;                // Scanner screen (no parameters)  
-  'manual-add': undefined;           // Manual Add screen (no parameters)
-  'book-detail': { book: string };   // Book Detail screen (book as JSON string)
+  index: undefined; // Home screen (no parameters)
+  scanner: undefined; // Scanner screen (no parameters)
+  'manual-add': undefined; // Manual Add screen (no parameters)
+  'book-detail': { book: string }; // Book Detail screen (book as JSON string)
 };
 
 // Expo Router navigation functions
