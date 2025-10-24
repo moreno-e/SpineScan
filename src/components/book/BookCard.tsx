@@ -9,9 +9,8 @@ interface BookCardProps {
   isEditMode?: boolean;
 }
 
-export const BookCard: React.FC<BookCardProps> = ({ book, onPress, isEditMode = false }) => {
+export const BookCard = ({ book, onPress, isEditMode = false }: BookCardProps) => {
   const handlePress = () => {
-    console.log('onPress', onPress);
     if (onPress) {
       onPress(book);
     }

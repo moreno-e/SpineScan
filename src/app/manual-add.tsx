@@ -1,6 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { AddBook } from '../components/add-book';
-import { Book } from '../types';
+import { View, StyleSheet } from 'react-native';
+import { AddBook } from '../components/AddBook';
 
 export default function ManualAddScreen() {
   return (
@@ -17,16 +16,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
   },
 });

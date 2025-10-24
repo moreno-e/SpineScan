@@ -9,17 +9,19 @@ interface ButtonProps {
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   loading?: boolean;
+  style?: any;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   title,
   onPress,
   variant = 'primary',
   size = 'medium',
   disabled = false,
   loading = false,
-}) => {
-  const buttonStyle = [styles.button, styles[variant], styles[size], disabled && styles.disabled];
+  style,
+}: ButtonProps) => {
+  const buttonStyle = [styles.button, styles[variant], styles[size], disabled && styles.disabled, style];
 
   const textStyle = [styles.text, styles[`${variant}Text`], styles[`${size}Text`]];
 

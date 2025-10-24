@@ -1,7 +1,5 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { Book } from '../../types/book';
-import { Image } from 'react-native';
-import { StyleSheet } from 'react-native';
 import { theme } from '../../constants/theme';
 import { useBooks } from '../../hooks/useBooks';
 import { useEffect, useState } from 'react';
@@ -10,7 +8,7 @@ interface BookDetailProps {
   isbn: string;
 }
 
-export const BookDetail: React.FC<BookDetailProps> = ({ isbn }) => {
+export const BookDetail = ({ isbn }: BookDetailProps) => {
   const [book, setBook] = useState<Book | null>(null);
   const { getBookByIsbn } = useBooks();
   useEffect(() => {

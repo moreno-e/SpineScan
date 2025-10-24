@@ -46,4 +46,44 @@ export const theme = {
       fontWeight: 'normal' as const,
     },
   },
+  // Common layout styles
+  layout: {
+    screen: {
+      flex: 1,
+      backgroundColor: '#FFFFFF',
+    },
+    centered: {
+      flex: 1,
+      backgroundColor: '#FFFFFF',
+      alignItems: 'center' as const,
+      justifyContent: 'center' as const,
+    },
+    padded: {
+      flex: 1,
+      backgroundColor: '#FFFFFF',
+      padding: 20,
+    },
+  },
+  // Common text styles
+  text: {
+    title: {
+      fontSize: 28,
+      fontWeight: 'bold' as const,
+      color: '#000000',
+      textAlign: 'center' as const,
+      marginBottom: 8,
+    },
+    subtitle: {
+      fontSize: 16,
+      color: '#666666',
+      textAlign: 'center' as const,
+      marginBottom: 40,
+    },
+    sectionTitle: {
+      fontSize: 24,
+      fontWeight: 'bold' as const,
+      color: '#000000',
+      marginBottom: 16,
+    },
+  },
 };
