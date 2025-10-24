@@ -19,8 +19,8 @@ export default function HomeScreen() {
         </TouchableOpacity>
 
         {/* Show Books */}
-        <TouchableOpacity style={styles.secondaryButton} onPress={() => router.push('/show-books')}>
-          <Text style={styles.secondaryButtonText}>Show Books</Text>
+        <TouchableOpacity style={styles.primaryButton} onPress={() => router.push('/show-books')}>
+          <Text style={styles.buttonText}>Show Books</Text>
         </TouchableOpacity>
       </View>
     </View>

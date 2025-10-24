@@ -6,17 +6,19 @@ import { theme } from '../../constants/theme';
 interface BookCardProps {
   book: Book;
   onPress?: (book: Book) => void;
+  isEditMode?: boolean;
 }
 
-export const BookCard: React.FC<BookCardProps> = ({ book, onPress }) => {
+export const BookCard: React.FC<BookCardProps> = ({ book, onPress, isEditMode = false }) => {
   const handlePress = () => {
+    console.log('onPress', onPress);
     if (onPress) {
       onPress(book);
     }
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handlePress}>
+    <TouchableOpacity style={[styles.container, isEditMode && styles.containerEditMode]} onPress={handlePress}>
       <View style={styles.content}>
         {book.cover && <Image source={{ uri: book.cover }} style={styles.cover} />}
 
@@ -46,7 +48,12 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.border,
     marginBottom: theme.spacing.md,
     overflow: 'hidden',
-    width: '80%',
+    flex: 1, // Take up remaining space
+    minWidth: 0, // Allow it to shrink
+  },
+  containerEditMode: {
+    // Adjust width when in edit mode to account for selection indicator
+    flex: 0.9, // Use 90% of available space to leave room for selection indicator
   },
   content: {
     flex: 1,
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#000000',
     marginBottom: theme.spacing.sm,

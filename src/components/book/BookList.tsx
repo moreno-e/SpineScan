@@ -4,12 +4,15 @@ import { useState } from 'react';
 import { useBooks } from '../../hooks/useBooks';
 import { BookCard } from './BookCard';
 import { theme } from '../../constants/theme';
+import { Input } from '../ui/Input';
+import { Link, router } from 'expo-router';
 
 export const BookList = () => {
   const { books, loading, error, removeBook } = useBooks();
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedBooks, setSelectedBooks] = useState<Book[]>([]);
   const [slideAnimation] = useState(new Animated.Value(0));
+  const [searchQuery, setSearchQuery] = useState('');
 
   const enterEditMode = () => {
     setIsEditMode(true);
@@ -32,7 +35,6 @@ export const BookList = () => {
   };
 
   const toggleBookSelection = (book: Book) => {
-    // cannot use includes because the books are not the same object, they have different references
     if (selectedBooks.some(b => b.isbn === book.isbn)) {
       setSelectedBooks(selectedBooks.filter(b => b.isbn !== book.isbn));
     } else {
@@ -50,6 +52,10 @@ export const BookList = () => {
     } catch (error) {
       Alert.alert('Error', 'Failed to delete books');
     }
+  };
+
+  const handleSearch = (searchQuery: string) => {
+    setSearchQuery(searchQuery);
   };
 
   if (loading) {
@@ -70,6 +76,11 @@ export const BookList = () => {
 
   return (
     <View style={styles.container}>
+      <Input
+        placeholder="Search books"
+        value={searchQuery}
+        onChangeText={(searchQuery: string) => handleSearch(searchQuery)}
+      />
       <View style={styles.header}>
         {/* Edit Mode Toggle Button */}
         <TouchableOpacity
@@ -88,7 +99,12 @@ export const BookList = () => {
       </View>
 
       <FlatList
-        data={books}
+        style={styles.flatList}
+        data={
+          searchQuery.length > 0
+            ? books.filter((book: Book) => book.title.toLowerCase().includes(searchQuery.toLowerCase()))
+            : books
+        }
         keyExtractor={item => item.isbn}
         renderItem={({ item }: { item: Book }) => {
           return (
@@ -107,12 +123,23 @@ export const BookList = () => {
               <View style={styles.bookItemWrapper}>
                 {isEditMode && (
                   <View style={styles.selectionIndicator}>
-                    <Text style={styles.selectionText}>
+                    <Text style={styles.selectionText} onPress={() => toggleBookSelection(item)}>
                       {selectedBooks.some(book => book.isbn === item.isbn) ? '✓' : '○'}
                     </Text>
                   </View>
                 )}
-                <BookCard book={item} onPress={() => toggleBookSelection(item)} />
+                <BookCard
+                  book={item}
+                  onPress={() =>
+                    !isEditMode
+                      ? router.push({
+                          pathname: '/book-detail',
+                          params: { isbn: item.isbn },
+                        })
+                      : toggleBookSelection(item)
+                  }
+                  isEditMode={isEditMode}
+                />
               </View>
             </Animated.View>
           );
@@ -127,7 +154,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
     padding: theme.spacing.lg,
-    minHeight: 400, // Ensure minimum height
+  },
+  flatList: {
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
@@ -175,6 +204,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: theme.spacing.md,
+    width: '100%', // Ensure it takes full width
+    flex: 1, // Allow it to expand to fill available space
   },
   selectionIndicator: {
     width: 40,
@@ -183,6 +214,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: theme.spacing.sm,
     borderColor: theme.colors.border,
+    flexShrink: 0, // Don't shrink the indicator
   },
   selectionText: {
     fontSize: 20,
