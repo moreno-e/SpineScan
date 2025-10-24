@@ -5,7 +5,7 @@ import { useBooks } from '../../hooks/useBooks';
 import { BookCard } from './BookCard';
 import { theme } from '../../constants/theme';
 import { Input } from '../ui/Input';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 
 export const BookList = () => {
   const { books, loading, error, removeBook } = useBooks();

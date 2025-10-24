@@ -11,14 +11,14 @@ interface InputProps {
   numberOfLines?: number;
 }
 
-export const Input: React.FC<InputProps> = ({
+export const Input = ({
   placeholder,
   value,
   onChangeText,
   error,
   multiline = false,
   numberOfLines = 1,
-}) => {
+}: InputProps) => {
   return (
     <View style={styles.container}>
       <TextInput

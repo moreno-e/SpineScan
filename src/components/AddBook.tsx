@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Book } from '../types';
-import { FC } from 'react';
 import { useBooks } from '../hooks/useBooks';
 
 type AddBookProps = {
@@ -9,7 +8,7 @@ type AddBookProps = {
   onCancel?: () => void;
 };
 
-export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
+export const AddBook = ({ onBookAdded, onCancel }: AddBookProps) => {
   const { addBook } = useBooks();
 
   // State declarations
@@ -28,8 +27,8 @@ export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
 
       return false;
     }
-    if (!author.trim()) {
-      setError('Author is required');
+    if (!isbn.trim()) {
+      setError('ISBN is required');
 
       return false;
     }

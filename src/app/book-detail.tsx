@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { BookDetail } from '../components/book/BookDetail';
 
 export default function BookDetailScreen() {
   const { isbn } = useLocalSearchParams();
+
   return (
     <View style={styles.container}>
       <BookDetail isbn={isbn as string} />
@@ -14,10 +15,6 @@ export default function BookDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
   },
 });

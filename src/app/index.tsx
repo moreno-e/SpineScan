@@ -1,82 +1,38 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { router } from 'expo-router';
+import { Screen } from '../components/layout/Screen';
+import { Button } from '../components/ui/Button';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>My Book Library</Text>
-      <Text style={styles.subtitle}>Scan and manage your book collection</Text>
+    <Screen centered>
+      <Image source={require('../../assets/SpineScan.png')} style={styles.logo} />
 
       <View style={styles.buttonContainer}>
-        {/* Scan Book */}
-        <TouchableOpacity style={styles.primaryButton} onPress={() => router.push('/scanner')}>
-          <Text style={styles.buttonText}>Scan Book</Text>
-        </TouchableOpacity>
+        <Button title="📸 Scan Book" onPress={() => router.push('/scanner')} variant="primary" size="medium" />
 
-        {/* Add Manually */}
-        <TouchableOpacity style={styles.secondaryButton} onPress={() => router.push('/manual-add')}>
-          <Text style={styles.secondaryButtonText}>Add Manually</Text>
-        </TouchableOpacity>
+        <Button
+          title="📚 View Collection"
+          onPress={() => router.push('/show-books')}
+          variant="secondary"
+          size="medium"
+        />
 
-        {/* Show Books */}
-        <TouchableOpacity style={styles.primaryButton} onPress={() => router.push('/show-books')}>
-          <Text style={styles.buttonText}>Show Books</Text>
-        </TouchableOpacity>
+        <Button title="➕ Add Manually" onPress={() => router.push('/manual-add')} variant="secondary" size="medium" />
       </View>
-    </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 40,
+  logo: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
   },
   buttonContainer: {
     width: '100%',
     maxWidth: 300,
-  },
-  primaryButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    marginBottom: 16,
-    alignItems: 'center',
-  },
-  secondaryButton: {
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: '#007AFF',
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    marginBottom: 16,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  secondaryButtonText: {
-    color: '#007AFF',
-    fontSize: 18,
-    fontWeight: '600',
+    gap: 10,
   },
 });
