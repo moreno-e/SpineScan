@@ -97,9 +97,11 @@ export const useBooks = (): UseBooksReturn => {
     }
   }, []);
 
-  const getBookByIsbn = useCallback(async (isbn: string): Promise<Book | null> => {
+  const getBookByIsbn = useCallback(async (isbn: string) => {
     try {
-      return await bookStorage.getBook(isbn);
+      const book = await bookStorage.getBook(isbn);
+
+      return book || null;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to get book by ISBN';
 

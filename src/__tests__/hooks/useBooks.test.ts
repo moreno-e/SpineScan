@@ -7,6 +7,7 @@ import type { Book } from '../../types';
 jest.mock('../../services/bookStorage', () => ({
   bookStorage: {
     getAll: jest.fn(),
+    getBook: jest.fn(),
     add: jest.fn(),
     remove: jest.fn(),
     checkIfExists: jest.fn(),
@@ -103,6 +104,43 @@ describe('useBooks', () => {
     });
   });
 
+  describe('getBookByIsbn functionality', () => {
+    it('should get a book by ISBN', async () => {
+      const mockBook: Book = {
+        isbn: '1234567890',
+        title: 'Test Book 1',
+        authors: ['Author 1'],
+        cover: null,
+        addedAt: Date.now(),
+      };
+      let book: Book | null = null;
+
+      // Mock the getBook method directly (not getAll)
+      mockBookStorage.getBook.mockResolvedValue(mockBook);
+
+      const { result } = renderHook(() => useBooks());
+
+      await act(async () => {
+        book = await result.current.getBookByIsbn('1234567890');
+      });
+
+      expect(book).toEqual(mockBook);
+      expect(mockBookStorage.getBook).toHaveBeenCalledWith('1234567890');
+    });
+    it('should return null if the book is not found', async () => {
+      mockBookStorage.getBook.mockResolvedValue(null);
+
+      const { result } = renderHook(() => useBooks());
+      let book: Book | null = null;
+
+      await act(async () => {
+        book = await result.current.getBookByIsbn('1234567890');
+      });
+
+      expect(book).toBeNull();
+      expect(mockBookStorage.getBook).toHaveBeenCalledWith('1234567890');
+    });
+  });
   describe('addBook functionality', () => {
     it('should add a book to the collection', async () => {
       // Arrange: Mock data
