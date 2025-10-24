@@ -89,8 +89,8 @@ export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
         <Text style={styles.buttonText}>{loading ? 'Adding...' : 'Add Book'}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={onCancel}>
-        <Text style={styles.buttonText}>Cancel</Text>
+      <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
+        <Text style={styles.cancelButtonText}>Cancel</Text>
       </TouchableOpacity>
       {error && <Text style={styles.error}>{error}</Text>}
     </View>
@@ -98,9 +98,10 @@ export const AddBook: FC<AddBookProps> = ({ onBookAdded, onCancel }) => {
 };
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: '85%',
     backgroundColor: '#fff',
-    padding: 20,
+    paddingTop: 20,
+    flexGrow: 1,
   },
   title: {
     fontSize: 24,
@@ -108,9 +109,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    height: 40,
+    height: 50,
     borderColor: 'gray',
     borderWidth: 1,
+    borderRadius: 10,
     marginBottom: 10,
     paddingHorizontal: 10,
   },
@@ -119,6 +121,20 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
+  },
+  cancelButton: {
+    backgroundColor: 'transparent',
+    borderColor: 'red',
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  cancelButtonText: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   buttonText: {
     color: 'white',

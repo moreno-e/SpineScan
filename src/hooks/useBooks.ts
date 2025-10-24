@@ -10,6 +10,7 @@ interface UseBooksReturn {
 
   // Actions
   addBook: (book: Book) => Promise<void>;
+  getBookByIsbn: (isbn: string) => Promise<Book | null>;
   removeBook: (isbn: string) => Promise<void>;
   checkIfBookExists: (isbn: string) => Promise<boolean>;
   refreshBooks: () => Promise<void>;
@@ -96,6 +97,18 @@ export const useBooks = (): UseBooksReturn => {
     }
   }, []);
 
+  const getBookByIsbn = useCallback(async (isbn: string): Promise<Book | null> => {
+    try {
+      return await bookStorage.getBook(isbn);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to get book by ISBN';
+
+      setError(errorMessage);
+
+      return null;
+    }
+  }, []);
+
   // Remove a book from the collection
   const removeBook = useCallback(async (isbn: string) => {
     try {
@@ -147,6 +160,7 @@ export const useBooks = (): UseBooksReturn => {
 
     // Actions
     addBook,
+    getBookByIsbn,
     removeBook,
     checkIfBookExists,
     refreshBooks,

@@ -5,8 +5,6 @@ import { Book } from '../types';
 export default function ManualAddScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Manual Add Screen</Text>
-      <Text style={styles.subtitle}>Search and add books manually</Text>
       <AddBook />
     </View>
   );
